@@ -13,7 +13,7 @@
 .link {
   color: #222;
   opacity: 0.5;
-  transition: opacity 250ms linear;
+  transition: opacity 250ms linear, color 250ms linear;
 }
 .active {
   composes: link;
