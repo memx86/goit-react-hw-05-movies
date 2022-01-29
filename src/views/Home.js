@@ -1,9 +1,14 @@
-// import PropTypes from "prop-types";
+import Section from "components/Section";
+import Container from "components/Container";
 
 function Home(props) {
-  return <div>Homepage</div>;
+  return (
+    <Section>
+      <Container>
+        <h1>Trending today</h1>
+      </Container>
+    </Section>
+  );
 }
-
-// Home.propTypes = {};
 
 export default Home;

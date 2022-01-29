@@ -1,9 +1,14 @@
-// import PropTypes from "prop-types";
+import Section from "components/Section";
+import Container from "components/Container";
 
 function NotFound(props) {
-  return <div>Page not found</div>;
+  return (
+    <Section>
+      <Container>
+        <h1>Page not found</h1>
+      </Container>
+    </Section>
+  );
 }
-
-// NotFound.propTypes = {};
 
 export default NotFound;
