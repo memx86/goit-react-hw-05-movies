@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import Loader from "components/Loader";
 import * as movieAPI from "../../js/moviesAPI";
 import s from "./Cast.module.css";
 const IMG_URL = "https://www.themoviedb.org/t/p/w138_and_h175_face";
 
 function Cast(props) {
   const [cast, setCast] = useState([]);
+  const [loader, setLoader] = useState(false);
   const [movieId] = useOutletContext();
 
   useEffect(() => {
-    movieAPI.getCredits(movieId).then((r) => {
-      setCast(r.cast);
-    });
+    setLoader(true);
+    movieAPI
+      .getCredits(movieId)
+      .then((r) => {
+        setCast(r.cast);
+      })
+      .finally(() => setLoader(false));
   }, [movieId]);
+  if (loader) return <Loader />;
   if (!cast.length) return <p>No information</p>;
   return (
     <ul className={s.list}>
