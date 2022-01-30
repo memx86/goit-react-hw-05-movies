@@ -11,25 +11,25 @@ function fetchUrl(url) {
 function getMovies(query) {
   const searchQuery = `?query=${query}`;
   const url = `${BASE_URL}${MOVIES}${searchQuery}&api_key=${KEY}&language=en-US`;
-  return fetchUrl(url);
+  return fetchUrl(url).then((r) => r.results);
 }
 function getMovie(id) {
   const movie = `movie/${id}`;
   const url = `${BASE_URL}${movie}?api_key=${KEY}&language=en-US`;
   return fetchUrl(url);
 }
-function getCredits(id) {
+function getCast(id) {
   const movie = `movie/${id}`;
   const url = `${BASE_URL}${movie}/credits?api_key=${KEY}&language=en-US`;
-  return fetchUrl(url);
+  return fetchUrl(url).then((r) => r.cast);
 }
 function getReviews(id) {
   const movie = `movie/${id}`;
   const url = `${BASE_URL}${movie}/reviews?api_key=${KEY}&language=en-US`;
-  return fetchUrl(url);
+  return fetchUrl(url).then((r) => r.results);
 }
 function getTrending() {
   const url = `${BASE_URL}trending/all/day?api_key=${KEY}&language=en-US`;
-  return fetchUrl(url);
+  return fetchUrl(url).then((r) => r.results);
 }
-export { fetchUrl, getMovies, getMovie, getCredits, getReviews, getTrending };
+export { fetchUrl, getMovies, getMovie, getCast, getReviews, getTrending };
