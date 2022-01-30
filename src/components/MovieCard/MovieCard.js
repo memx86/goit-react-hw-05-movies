@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import Section from "components/Section";
 import Container from "components/Container";
-import Loader from "components/Loader";
+// import Loader from "components/Loader";
 import Button from "components/Button";
 import * as movieAPI from "../../js/moviesAPI";
 import s from "./MovieCard.module.css";
@@ -13,7 +13,7 @@ const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2";
 function MovieCard(props) {
   const navigate = useNavigate();
   const { movieId } = useParams();
-  const { data, isLoading } = useQuery(`${movieId}`, getMovie, {
+  const { data } = useQuery(`${movieId}`, getMovie, {
     placeholderData: {
       release_date: "1970",
       genres: [],
@@ -31,7 +31,7 @@ function MovieCard(props) {
   const posterUrl = poster_path
     ? `${IMAGE_BASE_URL}${poster_path}`
     : "/300x450.png";
-  if (isLoading) return <Loader />;
+  // if (isLoading) return <Loader />;
   return (
     <Section>
       <Container>
