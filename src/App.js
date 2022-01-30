@@ -20,17 +20,26 @@ const queryClient = new QueryClient({
 
 const Home = lazy(() => import("./views/Home" /*webpackChunkName: "Home"*/));
 const Movies = lazy(() =>
-  import("./views/Movies" /*webpackChunkName: "Movies"*/)
+  import(
+    /* webpackChunkName: "Movies" */
+    /* webpackPrefetch: true */
+    "./views/Movies"
+  )
 );
 const MovieCard = lazy(() =>
-  import("./components/MovieCard" /*webpackChunkName: "MovieCard"*/)
+  import(
+    /* webpackChunkName: "MovieCard" */
+    /* webpackPrefetch: true */
+    "./components/MovieCard"
+  )
 );
 const Info = lazy(() =>
-  import("./components/Info" /*webpackChunkName: "Info"*/)
+  import(
+    /* webpackChunkName: "Info" */
+    /* webpackPrefetch: true */
+    "./components/Info"
+  )
 );
-// const Reviews = lazy(() =>
-//   import("./components/Reviews" /*webpackChunkName: "Reviews"*/)
-// );
 
 function App() {
   return (
