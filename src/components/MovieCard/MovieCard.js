@@ -18,9 +18,11 @@ function MovieCard(props) {
       release_date: "1970",
       genres: [],
     },
+    retry: false,
+    onError: () => navigate("/"),
   });
   function getMovie() {
-    return movieAPI.getMovie(movieId).catch(() => navigate("/"));
+    return movieAPI.getMovie(movieId);
   }
 
   const { poster_path, title, release_date, vote_average, overview, genres } =
