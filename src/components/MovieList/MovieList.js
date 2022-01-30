@@ -1,36 +1,22 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
-import * as movieAPI from "../../js/moviesAPI";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import s from "./MovieList.module.css";
 
-function MovieList(props) {
-  const [searchParams] = useSearchParams();
-  const [movies, setMovies] = useState([]);
-  const { pathname } = useLocation();
-  const query = searchParams.get("query");
-  useEffect(() => {
-    if (!query) {
-      setMovies([]);
-      return;
-    }
-    movieAPI.getMovies(query).then(onSuccess);
-  }, [query]);
-
-  function onSuccess(response) {
-    const movies = response.results;
-    setMovies(movies);
-  }
+function MovieList({ movies, pathname }) {
   return (
-    <div>
-      <ul className={s.list}>
-        {movies.map((movie) => (
-          <Link key={movie.id} to={`${pathname}/${movie.id}`}>
-            {movie.title}
-          </Link>
-        ))}
-      </ul>
-    </div>
+    <ul className={s.list}>
+      {movies.map(({ id, title, name }) => (
+        <Link key={id} to={`${pathname}/${id}`}>
+          {title ?? name}
+        </Link>
+      ))}
+    </ul>
   );
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pathname: PropTypes.string.isRequired,
+};
 
 export default MovieList;

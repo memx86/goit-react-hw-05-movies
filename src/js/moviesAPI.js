@@ -28,4 +28,8 @@ function getReviews(id) {
   const url = `${BASE_URL}${movie}/reviews?api_key=${KEY}&language=en-US`;
   return fetchUrl(url);
 }
-export { fetchUrl, getMovies, getMovie, getCredits, getReviews };
+function getTrending() {
+  const url = `${BASE_URL}trending/all/day?api_key=${KEY}&language=en-US`;
+  return fetchUrl(url);
+}
+export { fetchUrl, getMovies, getMovie, getCredits, getReviews, getTrending };

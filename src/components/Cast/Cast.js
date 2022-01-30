@@ -12,25 +12,22 @@ function Cast(props) {
     movieAPI.getCredits(movieId).then((r) => {
       setCast(r.cast);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  }, [movieId]);
+  if (!cast.length) return <p>No information</p>;
   return (
-    <ul>
-      {cast.length &&
-        cast.map(({ id, name, profile_path, character }) => (
-          <li key={id}>
-            {profile_path && (
-              <img
-                src={`${IMG_URL}${profile_path}`}
-                alt="name"
-                className={s.img}
-              />
-            )}
+    <ul className={s.list}>
+      {cast.map(({ id, name, profile_path, character }) => {
+        const profileUrl = profile_path
+          ? `${IMG_URL}${profile_path}`
+          : "/138x175.png";
+        return (
+          <li key={id} className={s.item}>
+            <img src={profileUrl} alt="name" className={s.img} />
             <p>{name}</p>
             <p>Character: {character}</p>
           </li>
-        ))}
+        );
+      })}
     </ul>
   );
 }

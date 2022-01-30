@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import Container from "components/Container";
 import Section from "components/Section";
+import Button from "components/Button";
 import * as movieAPI from "../../js/moviesAPI";
 import s from "./MovieCard.module.css";
 
@@ -12,31 +13,29 @@ function MovieCard(props) {
     release_date: "1970",
     genres: [],
   }));
+  const navigate = useNavigate();
   const { movieId } = useParams();
 
   useEffect(() => {
     movieAPI.getMovie(movieId).then(setMovie);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const { poster_path, title, release_date, popularity, overview, genres } =
+  }, [movieId]);
+  const { poster_path, title, release_date, vote_average, overview, genres } =
     movie;
   const year = release_date.slice(0, 4);
+  const posterUrl = poster_path
+    ? `${IMAGE_BASE_URL}${poster_path}`
+    : "/300x450.png";
   return (
     <Section>
       <Container>
+        <Button text="Go back" onClick={() => navigate(-1)} />
         <div className={s.wrapper}>
-          {poster_path && (
-            <img
-              src={`${IMAGE_BASE_URL}${poster_path}`}
-              alt={title}
-              className={s.img}
-            />
-          )}
-          <div>
+          <img src={posterUrl} alt={title} className={s.img} />
+          <div className={s.content}>
             <h1>
               {title} ({year})
             </h1>
-            <p>User score: {popularity}%</p>
+            <p>User score: {Math.round(vote_average * 10)}%</p>
             <h2>Overview</h2>
             <p>{overview}</p>
             <h3>Genres</h3>

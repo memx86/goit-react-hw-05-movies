@@ -1,3 +1,13 @@
 .img {
   width: 138px;
 }
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 138px);
+  gap: 0.5rem;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
