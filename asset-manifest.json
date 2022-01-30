@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.4768704f.css",
-    "main.js": "/static/js/main.d78dafcc.js",
+    "main.js": "/static/js/main.19465250.js",
     "Home.css": "/static/css/Home.08fdb839.chunk.css",
     "Home.js": "/static/js/Home.34097e21.chunk.js",
     "Movies.css": "/static/css/Movies.83d793eb.chunk.css",
     "Movies.js": "/static/js/Movies.a449ca77.chunk.js",
     "MovieCard.css": "/static/css/MovieCard.8dc07960.chunk.css",
-    "MovieCard.js": "/static/js/MovieCard.78f82693.chunk.js",
+    "MovieCard.js": "/static/js/MovieCard.04be0161.chunk.js",
     "Cast.css": "/static/css/Cast.3b15af2b.chunk.css",
     "Cast.js": "/static/js/Cast.1eeace5b.chunk.js",
     "Reviews.css": "/static/css/Reviews.29c98672.chunk.css",
@@ -15,13 +15,13 @@
     "static/js/134.bc1c6dcf.chunk.js": "/static/js/134.bc1c6dcf.chunk.js",
     "index.html": "/index.html",
     "main.4768704f.css.map": "/static/css/main.4768704f.css.map",
-    "main.d78dafcc.js.map": "/static/js/main.d78dafcc.js.map",
+    "main.19465250.js.map": "/static/js/main.19465250.js.map",
     "Home.08fdb839.chunk.css.map": "/static/css/Home.08fdb839.chunk.css.map",
     "Home.34097e21.chunk.js.map": "/static/js/Home.34097e21.chunk.js.map",
     "Movies.83d793eb.chunk.css.map": "/static/css/Movies.83d793eb.chunk.css.map",
     "Movies.a449ca77.chunk.js.map": "/static/js/Movies.a449ca77.chunk.js.map",
     "MovieCard.8dc07960.chunk.css.map": "/static/css/MovieCard.8dc07960.chunk.css.map",
-    "MovieCard.78f82693.chunk.js.map": "/static/js/MovieCard.78f82693.chunk.js.map",
+    "MovieCard.04be0161.chunk.js.map": "/static/js/MovieCard.04be0161.chunk.js.map",
     "Cast.3b15af2b.chunk.css.map": "/static/css/Cast.3b15af2b.chunk.css.map",
     "Cast.1eeace5b.chunk.js.map": "/static/js/Cast.1eeace5b.chunk.js.map",
     "Reviews.29c98672.chunk.css.map": "/static/css/Reviews.29c98672.chunk.css.map",
@@ -30,6 +30,6 @@
   },
   "entrypoints": [
     "static/css/main.4768704f.css",
-    "static/js/main.d78dafcc.js"
+    "static/js/main.19465250.js"
   ]
 }
