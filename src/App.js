@@ -10,7 +10,13 @@ import Loader from "components/Loader";
 // import Cast from "components/Cast";
 // import Reviews from "components/Reviews";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5000,
+    },
+  },
+});
 
 const Home = lazy(() => import("./views/Home" /*webpackChunkName: "Home"*/));
 const Movies = lazy(() =>
@@ -19,12 +25,12 @@ const Movies = lazy(() =>
 const MovieCard = lazy(() =>
   import("./components/MovieCard" /*webpackChunkName: "MovieCard"*/)
 );
-const Cast = lazy(() =>
-  import("./components/Cast" /*webpackChunkName: "Cast"*/)
+const Info = lazy(() =>
+  import("./components/Info" /*webpackChunkName: "Info"*/)
 );
-const Reviews = lazy(() =>
-  import("./components/Reviews" /*webpackChunkName: "Reviews"*/)
-);
+// const Reviews = lazy(() =>
+//   import("./components/Reviews" /*webpackChunkName: "Reviews"*/)
+// );
 
 function App() {
   return (
@@ -37,8 +43,8 @@ function App() {
             <Route path="/movies" element={<Movies />} />
             <Route path="/movies/:movieId" element={<MovieCard />}>
               <Route index element={<div></div>} />
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
+              <Route path="cast" element={<Info type="cast" />} />
+              <Route path="reviews" element={<Info type="reviews" />} />
             </Route>
             <Route path="*" element={<Home />} />
           </Routes>
