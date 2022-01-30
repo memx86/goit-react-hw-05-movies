@@ -1,6 +1,12 @@
 // import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Section from "components/Section";
 import Container from "components/Container";
 // import Loader from "components/Loader";
@@ -12,6 +18,8 @@ const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2";
 
 function MovieCard(props) {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { movieId } = useParams();
   const { data } = useQuery(`${movieId}`, getMovie, {
     placeholderData: {
@@ -24,7 +32,10 @@ function MovieCard(props) {
   function getMovie() {
     return movieAPI.getMovie(movieId);
   }
-
+  const goBack = () => {
+    const prevLocation = location?.state?.pathname ?? "/";
+    navigate(prevLocation);
+  };
   const { poster_path, title, release_date, vote_average, overview, genres } =
     data;
   const year = release_date.slice(0, 4);
@@ -35,7 +46,7 @@ function MovieCard(props) {
   return (
     <Section>
       <Container>
-        <Button text="Go back" onClick={() => navigate(-1)} />
+        <Button text="Go back" onClick={goBack} />
         <div className={s.wrapper}>
           <img src={posterUrl} alt={title} className={s.img} />
           <div className={s.content}>
@@ -59,10 +70,20 @@ function MovieCard(props) {
           <p>Additional information</p>
           <ul className={s.list}>
             <li>
-              <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+              <Link
+                to={`/movies/${movieId}/cast`}
+                state={location?.state ?? location}
+              >
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+              <Link
+                to={`/movies/${movieId}/reviews`}
+                state={location?.state ?? location}
+              >
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>

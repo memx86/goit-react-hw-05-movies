@@ -10,7 +10,7 @@ function Cast({ data }) {
           ? `${IMG_URL}${profile_path}`
           : "/138x175.png";
         return (
-          <li key={id} className={s.item}>
+          <li key={`${id}${character}`} className={s.item}>
             <img src={profileUrl} alt="name" className={s.img} />
             <p>{name}</p>
             <p>Character: {character}</p>
