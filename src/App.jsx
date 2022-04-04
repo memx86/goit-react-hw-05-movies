@@ -4,11 +4,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Navbar from "components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Loader from "components/Loader";
-// import Home from "views/Home";
-// import Movies from "views/Movies";
-// import MovieCard from "components/MovieCard";
-// import Cast from "components/Cast";
-// import Reviews from "components/Reviews";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,11 +21,11 @@ const Movies = lazy(() =>
     "./views/Movies"
   )
 );
-const MovieCard = lazy(() =>
+const Movie = lazy(() =>
   import(
-    /* webpackChunkName: "MovieCard" */
+    /* webpackChunkName: "Movie" */
     /* webpackPrefetch: true */
-    "./components/MovieCard"
+    "./components/Movie"
   )
 );
 const Info = lazy(() =>
@@ -50,7 +45,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:movieId" element={<MovieCard />}>
+            <Route path="/movies/:movieId" element={<Movie />}>
               <Route index element={<div></div>} />
               <Route path="cast" element={<Info type="cast" />} />
               <Route path="reviews" element={<Info type="reviews" />} />

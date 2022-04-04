@@ -1,6 +1,7 @@
 .list {
   margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  justify-content: center;
   gap: 1rem;
 }

@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import {
   Link,
@@ -12,11 +11,11 @@ import Container from "components/Container";
 // import Loader from "components/Loader";
 import Button from "components/Button";
 import * as movieAPI from "../../js/moviesAPI";
-import s from "./MovieCard.module.css";
+import s from "./Movie.module.css";
 
 const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2";
 
-function MovieCard(props) {
+function Movie() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -93,4 +92,4 @@ function MovieCard(props) {
   );
 }
 
-export default MovieCard;
+export default Movie;

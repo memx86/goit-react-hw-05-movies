@@ -1,15 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import MovieCard from "components/MovieCard";
 import s from "./MovieList.module.css";
 
 function MovieList({ movies, pathname }) {
-  const location = useLocation();
   return (
     <ul className={s.list}>
-      {movies.map(({ id, title, name }) => (
-        <Link key={id} to={`${pathname}/${id}`} state={location}>
-          {title ?? name}
-        </Link>
+      {movies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} pathname={pathname} />
       ))}
     </ul>
   );

@@ -5,7 +5,7 @@ import Loader from "components/Loader";
 import * as movieAPI from "../js/moviesAPI";
 import MovieList from "components/MovieList";
 
-function Home(props) {
+function Home() {
   const { data, isLoading } = useQuery("trending", movieAPI.getTrending);
 
   if (isLoading) return <Loader />;
