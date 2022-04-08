@@ -4,15 +4,19 @@ import s from "./MovieCard.module.css";
 
 function MovieCard({ movie, pathname }) {
   const location = useLocation();
-  const { id, title, name, poster_path } = movie;
+  const { id, title, name, poster_path, release_date, first_air_date } = movie;
+  const year = new Date(release_date || first_air_date).getFullYear() || "";
   return (
-    <li>
+    <li className={s.item}>
       <Link to={`${pathname}/${id}`} state={location} className={s.link}>
         <img
+          className={s.img}
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           alt={title ?? name}
         />
-        <p>{title ?? name}</p>
+        <p className={s.text}>
+          {title ?? name}, {year}
+        </p>
       </Link>
     </li>
   );

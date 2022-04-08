@@ -12,7 +12,7 @@ function Home() {
   return (
     <Section>
       <Container>
-        <h1>Trending today</h1>
+        <h1 className="trending-title">Trending today</h1>
         <MovieList movies={data} pathname="/movies" />
       </Container>
     </Section>
