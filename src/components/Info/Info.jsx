@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 import Loader from "components/Loader";
 import Cast from "components/Cast";
 import Reviews from "components/Reviews";
-import * as movieAPI from "../../js/moviesAPI";
+import api from "js/moviesAPI";
 
 function Info({ type }) {
   const [movieId] = useOutletContext();
   const { data, isLoading } = useQuery(`${type}${movieId}`, getInfo);
   function getInfo() {
-    if (type === "cast") return movieAPI.getCast(movieId);
-    if (type === "reviews") return movieAPI.getReviews(movieId);
+    if (type === "cast") return api.getCast(movieId);
+    if (type === "reviews") return api.getReviews(movieId);
   }
   if (isLoading) return <Loader />;
   if (!data.length) return <p>No reviews</p>;

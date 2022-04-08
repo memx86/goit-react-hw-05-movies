@@ -10,7 +10,7 @@ import Section from "components/Section";
 import Container from "components/Container";
 // import Loader from "components/Loader";
 import Button from "components/Button";
-import * as movieAPI from "../../js/moviesAPI";
+import api from "js/moviesAPI";
 import s from "./Movie.module.css";
 
 const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2";
@@ -29,7 +29,7 @@ function Movie() {
     onError: () => navigate("/"),
   });
   function getMovie() {
-    return movieAPI.getMovie(movieId);
+    return api.getMovie(movieId);
   }
   const goBack = () => {
     const prevLocation = location?.state?.pathname ?? "/";

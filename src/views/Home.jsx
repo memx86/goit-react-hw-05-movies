@@ -2,11 +2,11 @@ import { useQuery } from "react-query";
 import Section from "components/Section";
 import Container from "components/Container";
 import Loader from "components/Loader";
-import * as movieAPI from "../js/moviesAPI";
+import api from "js/moviesAPI";
 import MovieList from "components/MovieList";
 
 function Home() {
-  const { data, isLoading } = useQuery("trending", movieAPI.getTrending);
+  const { data, isLoading } = useQuery("trending", api.getTrending);
 
   if (isLoading) return <Loader />;
   return (

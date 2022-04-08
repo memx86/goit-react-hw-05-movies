@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { useLocation, useSearchParams } from "react-router-dom";
 import MovieList from "components/MovieList";
 import Loader from "components/Loader";
-import * as movieAPI from "../../js/moviesAPI";
+import api from "js/moviesAPI";
 // import s from "./MovieSearch.module.css";
 
 function MovieSearch() {
@@ -12,7 +12,8 @@ function MovieSearch() {
   const { data, isLoading } = useQuery(["movies", query], getMovies);
   function getMovies() {
     if (!query) return [];
-    return movieAPI.getMovies(query);
+    api.query = query;
+    return api.getMovies();
   }
   const { pathname } = useLocation();
 
