@@ -33,7 +33,9 @@ function Movie() {
   }
   const goBack = () => {
     const prevLocation = location?.state?.pathname ?? "/";
-    navigate(prevLocation);
+    const query = location?.state?.query ?? "";
+    const prevPath = query ? `${prevLocation}?query=${query}` : prevLocation;
+    navigate(prevPath);
   };
   const { poster_path, title, release_date, vote_average, overview, genres } =
     data;
