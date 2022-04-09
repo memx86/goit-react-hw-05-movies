@@ -30,7 +30,7 @@ function MovieSearch() {
   if (isLoading) return <Loader />;
   return (
     <Fragment>
-      <MovieList movies={data.results} pathname={pathname} />
+      {data?.results && <MovieList movies={data.results} pathname={pathname} />}
       {query && (
         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
       )}
