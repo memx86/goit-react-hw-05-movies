@@ -28,7 +28,7 @@ class MoviesApi {
       page: this.#page,
     });
     const url = `${MoviesApi.ENDPOINTS.SEARCH}?${params}&`;
-    return this.#fetchUrl(url).then((r) => r.results);
+    return this.#fetchUrl(url);
   }
   getMovie(id) {
     const url = `${MoviesApi.ENDPOINTS.MOVIE}${id}?`;

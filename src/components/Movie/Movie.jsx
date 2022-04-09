@@ -52,18 +52,23 @@ function Movie() {
           <img src={posterUrl} alt={title} className={s.img} />
           <div className={s.content}>
             <h1>
-              {title} ({year})
+              {title} {year && `(${year})`}
             </h1>
-            <p>User score: {Math.round(vote_average * 10)}%</p>
+            <p>
+              User score:{" "}
+              {vote_average ? `${Math.round(vote_average * 10)}%` : "No votes"}
+            </p>
             <h2>Overview</h2>
             <p>{overview}</p>
             <h3>Genres</h3>
-            {genres.length && (
+            {genres.length ? (
               <ul className={s.genres}>
                 {genres.map(({ id, name }) => (
                   <li key={id}>{name}</li>
                 ))}
               </ul>
+            ) : (
+              "No genres found"
             )}
           </div>
         </div>

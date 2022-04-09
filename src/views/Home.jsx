@@ -10,10 +10,12 @@ import Pagination from "components/Pagination/Pagination";
 function Home() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const { data, isLoading } = useQuery(["trending", page], () => {
+
+  const { data, isLoading } = useQuery(["trending", page], getTrending);
+  function getTrending() {
     api.page = page;
     return api.getTrending();
-  });
+  }
   const responseTotalPages = data?.total_pages;
 
   useEffect(() => {
