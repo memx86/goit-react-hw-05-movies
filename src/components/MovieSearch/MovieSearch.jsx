@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useSearchParams } from "react-router-dom";
 import MovieList from "components/MovieList";
@@ -16,6 +17,9 @@ function MovieSearch() {
     return api.getMovies();
   }
   const { pathname } = useLocation();
+  useEffect(() => {
+    api.page = 1;
+  }, []);
 
   if (isLoading) return <Loader />;
   return <MovieList movies={data} pathname={pathname} />;
