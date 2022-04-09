@@ -1,38 +1,27 @@
-import { useState, useEffect } from "react";
-import { useQuery } from "react-query";
+import PropTypes from "prop-types";
 import Section from "components/Section";
 import Container from "components/Container";
-import Loader from "components/Loader";
-import api from "js/moviesAPI";
-import MovieList from "components/MovieList";
-import Pagination from "components/Pagination/Pagination";
+import Trending from "components/Trending";
 
-function Home() {
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  const { data, isLoading } = useQuery(["trending", page], getTrending);
-  function getTrending() {
-    api.page = page;
-    return api.getTrending();
-  }
-  const responseTotalPages = data?.total_pages;
-
-  useEffect(() => {
-    if (!responseTotalPages) return;
-    setTotalPages(responseTotalPages);
-  }, [responseTotalPages]);
-
-  if (isLoading) return <Loader />;
+function Home({ page, totalPages, setPage, setTotalPages }) {
   return (
     <Section>
       <Container>
-        <h1 className="trending-title">Trending today</h1>
-        <MovieList movies={data.results} pathname="/movies" />
-        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+        <Trending
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+          setTotalPages={setTotalPages}
+        />
       </Container>
     </Section>
   );
 }
+Home.propTypes = {
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  setTotalPages: PropTypes.func.isRequired,
+};
 
 export default Home;

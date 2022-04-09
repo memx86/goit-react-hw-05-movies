@@ -1,17 +1,16 @@
-import { useState, useEffect, Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import MovieList from "components/MovieList";
 import Loader from "components/Loader";
 import api from "js/moviesAPI";
 import Pagination from "components/Pagination/Pagination";
 // import s from "./MovieSearch.module.css";
 
-function MovieSearch() {
+function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
   const { data, isLoading } = useQuery(["movies", query, page], getMovies);
   function getMovies() {
@@ -20,12 +19,16 @@ function MovieSearch() {
     api.page = page;
     return api.getMovies();
   }
+  useEffect(() => {
+    setPage(1);
+  }, [setPage]);
+
   const { pathname } = useLocation();
   const responseTotalPages = data?.total_pages;
   useEffect(() => {
     if (!responseTotalPages) return;
     setTotalPages(responseTotalPages);
-  }, [responseTotalPages]);
+  }, [responseTotalPages, setTotalPages]);
 
   if (isLoading) return <Loader />;
   return (
@@ -37,5 +40,11 @@ function MovieSearch() {
     </Fragment>
   );
 }
+MovieSearch.propTypes = {
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  setTotalPages: PropTypes.func.isRequired,
+};
 
 export default MovieSearch;

@@ -1,4 +1,4 @@
-import { Fragment, lazy, Suspense } from "react";
+import { Fragment, lazy, Suspense, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Navbar from "components/Navbar";
@@ -37,20 +37,52 @@ const Info = lazy(() =>
 );
 
 function App() {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   return (
     <Fragment>
       <QueryClientProvider client={queryClient}>
         <Navbar />
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalPages}
+                  setTotalPages={setTotalPages}
+                />
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <Movies
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalPages}
+                  setTotalPages={setTotalPages}
+                />
+              }
+            />
             <Route path="/movies/:movieId" element={<Movie />}>
               <Route index element={<div></div>} />
               <Route path="cast" element={<Info type="cast" />} />
               <Route path="reviews" element={<Info type="reviews" />} />
             </Route>
-            <Route path="*" element={<Home />} />
+            <Route
+              path="*"
+              element={
+                <Home
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalPages}
+                  setTotalPages={setTotalPages}
+                />
+              }
+            />
           </Routes>
         </Suspense>
         <ReactQueryDevtools initialIsOpen={false} />
