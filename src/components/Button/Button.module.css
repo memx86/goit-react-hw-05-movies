@@ -25,3 +25,14 @@
   margin-left: auto;
   margin-right: auto;
 }
+.small {
+  composes: btn;
+  min-width: 40px;
+}
+.current {
+  composes: small;
+  background-color: transparent;
+  color: #000;
+  border-color: #0080ff;
+  cursor: default;
+}

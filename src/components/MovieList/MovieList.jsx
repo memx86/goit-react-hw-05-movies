@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import MovieCard from "components/MovieCard";
 import s from "./MovieList.module.css";
 
-function MovieList({ movies, pathname }) {
+function MovieList({ movies = [], pathname }) {
   return (
     <ul className={s.list}>
       {movies.map((movie) => (
