@@ -11,9 +11,9 @@ import Container from "components/Container";
 // import Loader from "components/Loader";
 import Button from "components/Button";
 import api from "js/moviesAPI";
+import noImage from "images/poster-img.jpg";
+import noImageRetina from "images/poster-img@2x.jpg";
 import s from "./Movie.module.css";
-
-const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w300_and_h450_bestv2";
 
 function Movie() {
   const navigate = useNavigate();
@@ -40,16 +40,22 @@ function Movie() {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     data;
   const year = release_date.slice(0, 4);
-  const posterUrl = poster_path
-    ? `${IMAGE_BASE_URL}${poster_path}`
-    : "/300x450.png";
+  const poster = poster_path
+    ? `https://www.themoviedb.org/t/p/w300${poster_path}`
+    : noImage;
+  const posterRetina = poster_path
+    ? `https://www.themoviedb.org/t/p/w500${poster_path}`
+    : noImageRetina;
   // if (isLoading) return <Loader />;
   return (
     <Section>
       <Container>
         <Button text="Go back" onClick={goBack} />
         <div className={s.wrapper}>
-          <img src={posterUrl} alt={title} className={s.img} />
+          <picture>
+            <source srcSet={`${poster} 1x, ${posterRetina} 2x`} />
+            <img src={poster} alt={title} className={s.img} />
+          </picture>
           <div className={s.content}>
             <h1>
               {title} {year && `(${year})`}
