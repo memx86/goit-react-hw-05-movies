@@ -42,10 +42,10 @@ class MoviesApi {
     const url = `${MoviesApi.ENDPOINTS.MOVIE}${id}/reviews?`;
     return this.#fetchUrl(url).then((r) => r.results);
   }
-  getTrending = () => {
+  getTrending() {
     const url = `${MoviesApi.ENDPOINTS.TRENDING}?page=${this.#page}&`;
     return this.#fetchUrl(url);
-  };
+  }
   get query() {
     return this.#query;
   }
