@@ -1,8 +1,9 @@
-import { Fragment, lazy, Suspense, useState } from "react";
+import { Fragment, lazy, Suspense, useState, useRef } from "react";
+import { Route, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Navbar from "components/Navbar";
-import { Route, Routes } from "react-router-dom";
+import NavButtons from "components/NavButtons";
 import Loader from "components/Loader";
 
 const queryClient = new QueryClient({
@@ -38,10 +39,14 @@ const Info = lazy(() =>
 
 function App() {
   const [totalPages, setTotalPages] = useState(1);
+  const topDiv = useRef();
+  const bottomDiv = useRef();
   return (
     <Fragment>
       <QueryClientProvider client={queryClient}>
+        <div ref={topDiv}></div>
         <Navbar />
+        <NavButtons top={topDiv.current} bottom={bottomDiv.current} />
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
@@ -69,6 +74,7 @@ function App() {
             />
           </Routes>
         </Suspense>
+        <div ref={bottomDiv}></div>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Fragment>

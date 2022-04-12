@@ -1,23 +1,25 @@
-import { AiOutlineSearch } from "react-icons/ai";
 import PropTypes from "prop-types";
 import s from "./IconButton.module.css";
 
-function IconButton({ type = "button", icon }) {
-  switch (icon) {
-    case "search":
-      return (
-        <button type={type} className={s.search} aria-label="search">
-          <AiOutlineSearch style={{ width: "40" }} />
-        </button>
-      );
-    default:
-      return <button type={type} aria-label="button"></button>;
-  }
+function IconButton({ type = "button", icon, role, onClick = () => {} }) {
+  const className = s[role] ?? "";
+  return (
+    <button
+      type={type}
+      className={className}
+      aria-label={role}
+      onClick={onClick}
+    >
+      {icon}
+    </button>
+  );
 }
 
 IconButton.propTypes = {
   type: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.node,
+  role: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default IconButton;

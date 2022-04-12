@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
 import s from "./SearchForm.module.css";
 import IconButton from "components/IconButton";
 
-function SearchForm(props) {
+function SearchForm() {
   const [query, setQuery] = useState("");
   const [, setSearchParams] = useSearchParams();
 
@@ -27,7 +28,11 @@ function SearchForm(props) {
     <form className={s.form} onSubmit={handleSubmit}>
       <label className={s.label}>
         <span className={s.btn}>
-          <IconButton type="submit" icon="search" />
+          <IconButton
+            type="submit"
+            role="search"
+            icon={<AiOutlineSearch style={{ width: "40" }} />}
+          />
         </span>
         <input
           className={s.input}

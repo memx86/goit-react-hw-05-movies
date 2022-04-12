@@ -32,3 +32,9 @@
   background-color: transparent;
   border-color: transparent;
 }
+.up,
+.down {
+  composes: btn;
+  border-radius: 50%;
+  height: 50px;
+}
