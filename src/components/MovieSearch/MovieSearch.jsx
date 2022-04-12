@@ -8,9 +8,10 @@ import api from "js/moviesAPI";
 import Pagination from "components/Pagination/Pagination";
 import s from "./MovieSearch.module.css";
 
-function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
+function MovieSearch({ totalPages, setTotalPages }) {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
+  const page = searchParams.get("page") ? searchParams.get("page") : 1;
 
   const { data, isLoading } = useQuery(["movies", query, page], getMovies);
   function getMovies() {
@@ -19,9 +20,6 @@ function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
     api.page = page;
     return api.getMovies();
   }
-  useEffect(() => {
-    setPage(1);
-  }, [setPage]);
 
   const { pathname } = useLocation();
   const responseTotalPages = data?.total_pages;
@@ -31,20 +29,17 @@ function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
   }, [responseTotalPages, setTotalPages]);
 
   if (isLoading) return <Loader />;
-  if (query && !data?.results?.length)
+  if (query && !data?.results?.length) {
     return <p className={s.error}>{query} not found</p>;
+  }
   return (
     <Fragment>
       {data?.results && <MovieList movies={data.results} pathname={pathname} />}
-      {query && (
-        <Pagination page={page} setPage={setPage} totalPages={totalPages} />
-      )}
+      {query && <Pagination totalPages={totalPages} />}
     </Fragment>
   );
 }
 MovieSearch.propTypes = {
-  page: PropTypes.number.isRequired,
-  setPage: PropTypes.func.isRequired,
   totalPages: PropTypes.number.isRequired,
   setTotalPages: PropTypes.func.isRequired,
 };

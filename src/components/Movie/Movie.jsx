@@ -34,7 +34,15 @@ function Movie() {
   const goBack = () => {
     const prevLocation = location?.state?.pathname ?? "/";
     const query = location?.state?.query ?? "";
-    const prevPath = query ? `${prevLocation}?query=${query}` : prevLocation;
+    const page = location?.state?.page ?? "";
+    let prevPath;
+    if (page && query) {
+      prevPath = `${prevLocation}?query=${query}&page=${page}`;
+    } else if (page) {
+      prevPath = `${prevLocation}?page=${page}`;
+    } else if (query) {
+      prevPath = `${prevLocation}?query=${query}`;
+    } else prevPath = prevLocation;
     navigate(prevPath);
   };
   const { poster_path, title, release_date, vote_average, overview, genres } =

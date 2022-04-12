@@ -37,7 +37,6 @@ const Info = lazy(() =>
 );
 
 function App() {
-  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   return (
     <Fragment>
@@ -48,23 +47,13 @@ function App() {
             <Route
               path="/"
               element={
-                <Home
-                  page={page}
-                  setPage={setPage}
-                  totalPages={totalPages}
-                  setTotalPages={setTotalPages}
-                />
+                <Home totalPages={totalPages} setTotalPages={setTotalPages} />
               }
             />
             <Route
               path="/movies"
               element={
-                <Movies
-                  page={page}
-                  setPage={setPage}
-                  totalPages={totalPages}
-                  setTotalPages={setTotalPages}
-                />
+                <Movies totalPages={totalPages} setTotalPages={setTotalPages} />
               }
             />
             <Route path="/movies/:movieId" element={<Movie />}>
@@ -75,12 +64,7 @@ function App() {
             <Route
               path="*"
               element={
-                <Home
-                  page={page}
-                  setPage={setPage}
-                  totalPages={totalPages}
-                  setTotalPages={setTotalPages}
-                />
+                <Home totalPages={totalPages} setTotalPages={setTotalPages} />
               }
             />
           </Routes>

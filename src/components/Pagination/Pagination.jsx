@@ -1,12 +1,21 @@
+import { useSearchParams } from "react-router-dom";
 import Button from "components/Button";
 import PropTypes from "prop-types";
 import s from "./Pagination.module.css";
 
-function Pagination({ page, setPage, totalPages }) {
+function Pagination({ totalPages }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+  const query = searchParams.get("query");
+
   const setNewPage = (newPage) => {
     let pageToSet = newPage > 1 ? newPage : 1;
     pageToSet = newPage < totalPages ? newPage : totalPages;
-    setPage(pageToSet);
+    if (query) {
+      setSearchParams({ query, page: pageToSet });
+    } else {
+      setSearchParams({ page: pageToSet });
+    }
   };
 
   return (
@@ -19,7 +28,7 @@ function Pagination({ page, setPage, totalPages }) {
         />
       )}
       {page > 1 && (
-        <Button text="1" onClick={() => setPage(1)} className="small" />
+        <Button text="1" onClick={() => setNewPage(1)} className="small" />
       )}
       {page - 2 > 2 && <span>...</span>}
       {page - 2 > 1 && (
@@ -71,8 +80,6 @@ function Pagination({ page, setPage, totalPages }) {
 }
 
 Pagination.propTypes = {
-  page: PropTypes.number.isRequired,
-  setPage: PropTypes.func.isRequired,
   totalPages: PropTypes.number.isRequired,
 };
 
