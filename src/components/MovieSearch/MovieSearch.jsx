@@ -6,7 +6,7 @@ import MovieList from "components/MovieList";
 import Loader from "components/Loader";
 import api from "js/moviesAPI";
 import Pagination from "components/Pagination/Pagination";
-// import s from "./MovieSearch.module.css";
+import s from "./MovieSearch.module.css";
 
 function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
   const [searchParams] = useSearchParams();
@@ -31,6 +31,8 @@ function MovieSearch({ page, totalPages, setPage, setTotalPages }) {
   }, [responseTotalPages, setTotalPages]);
 
   if (isLoading) return <Loader />;
+  if (query && !data?.results?.length)
+    return <p className={s.error}>{query} not found</p>;
   return (
     <Fragment>
       {data?.results && <MovieList movies={data.results} pathname={pathname} />}
