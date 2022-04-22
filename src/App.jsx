@@ -46,7 +46,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div ref={topDiv}></div>
         <Navbar />
-        <NavButtons top={topDiv.current} bottom={bottomDiv.current} />
+        {topDiv.current && (
+          <NavButtons top={topDiv.current} bottom={bottomDiv.current} />
+        )}
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
